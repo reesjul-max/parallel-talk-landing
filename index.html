@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Talk - Communication Tools for Difficult Conversations</title>
+    <meta name="description" content="Communicate clearly and safely in high-conflict situations. Starting with Parallel Talk Parent for co-parents.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: #4b5563;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero .platform-intro {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Waitlist Form */
+        .waitlist-form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-note {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .section-header p {
+            font-size: 20px;
+            color: #6b7280;
+        }
+
+        /* Features Grid */
+        .features {
+            background: #f9fafb;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 16px;
+            color: white;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .step p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Problem/Solution */
+        .problem-solution {
+            background: #f9fafb;
+        }
+
+        .ps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .ps-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem-card {
+            border-left: 4px solid #dc2626;
+        }
+
+        .solution-card {
+            border-left: 4px solid #10b981;
+        }
+
+        .ps-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .ps-card ul {
+            list-style: none;
+        }
+
+        .ps-card li {
+            padding: 12px 0 12px 24px;
+            position: relative;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .ps-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #9ca3af;
+        }
+
+        .problem-card li::before {
+            background: #dc2626;
+        }
+
+        .solution-card li::before {
+            background: #10b981;
+        }
+
+        /* For Attorneys */
+        .for-attorneys {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .for-attorneys .section-header h2,
+        .for-attorneys .section-header p {
+            color: white;
+        }
+
+        .attorney-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .attorney-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .attorney-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .attorney-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        /* FAQ */
+        .faq {
+            background: white;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #f9fafb;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #2563eb;
+        }
+
+        .faq-item p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Future Section */
+        .future-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            padding: 60px 0;
+        }
+
+        .future-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .future-content h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .future-content p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .future-content .highlight {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .subtitle {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .waitlist-form {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="data:image/webp;base64,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" alt="Parallel Talk Logo">
+                </a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#attorneys">For Attorneys</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Form -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Difficult Conversations, Made Easier</h1>
+                <p class="subtitle">AI-powered communication tools for when it matters most</p>
+                <p class="platform-intro">
+                    Parallel Talk is a platform designed to help you navigate challenging conversations 
+                    with clarity and confidence. Our first product, <strong>Parallel Talk Parent</strong>, 
+                    focuses on high-conflict co-parenting communication.
+                </p>
+                
+                <div class="waitlist-form">
+                    <h3>Join the Waitlist</h3>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdkIey9chw0E6ZjL0ztwuDMnkDOY-kMy53wJHLDbHhktQg1tQ/viewform?embedded=true" width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px;">Loading…</iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Parallel Talk Parent Helps</h2>
+                <p>AI-assisted communication that keeps the focus on what matters most, your children</p>
+            </div>
+            <div class="features-grid">
+                <!-- 1. Safety for Both Parties -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Safety for Both Parties</h3>
+                    <p>Three-tier safety filtering prevents hurtful messages from being sent or received. Protects both parties from harmful communication while keeping discussions focused on your children.</p>
+                </div>
+                <!-- 2. AI-Assisted Clear Communication -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </div>
+                    <h3>AI-Assisted Clear Communication</h3>
+                    <p>Get suggestions for neutral, specific phrasing that may help reduce misunderstandings. AI helps you express your intent clearly, which can minimize unnecessary back-and-forth.</p>
+                </div>
+                <!-- 3. Court Document Reference -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3>Court Document Reference</h3>
+                    <p>Upload your court orders for easy reference. AI helps you cite specific sections when drafting messages, making your communication more precise and documented.</p>
+                </div>
+                <!-- 4. Court-Ready Documentation -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="12" y1="18" x2="12" y2="12"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <h3>Court-Ready Documentation</h3>
+                    <p>Every message is timestamped and immutable. Export complete communication history in professional, court-acceptable format with full audit trail.</p>
+                </div>
+                <!-- 5. Searchable Message History -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <h3>Searchable Message History</h3>
+                    <p>Find any conversation instantly. Search your complete communication history by keywords, dates, or topics. Never lose track of what was discussed or agreed upon.</p>
+                </div>
+                <!-- 6. Built-In Pause -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Built-In Pause</h3>
+                    <p>No real-time chat means no reactive responses. Take time to think, get AI assistance, and send messages thoughtfully.</p>
+                </div>
+                <!-- 7. You Stay in Control -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                    </div>
+                    <h3>You Stay in Control</h3>
+                    <p>AI suggests—you decide. Nothing sends without your explicit approval. The platform helps you communicate better, but you own your words.</p>
+                </div>
+                <!-- 8. Private & Secure -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Private & Secure</h3>
+                    <p>Enterprise-grade encryption, complete privacy, and strict data protection. Your communication stays between you and your co-parent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Simple, structured communication in four steps</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Draft Your Message</h3>
+                    <p>Write what you want to say privately. No one else sees it yet.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get AI Assistance</h3>
+                    <p>Our AI analyzes your message and may suggest neutral, clear alternatives if needed.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Review & Approve</h3>
+                    <p>Choose the phrasing that works best. Edit as needed. You're in complete control.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Send with Confidence</h3>
+                    <p>Your message is sent, timestamped, and saved for your records.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built for High-Conflict Communication</h2>
+            </div>
+            <div class="ps-grid">
+                <div class="ps-card problem-card">
+                    <h3>Current Challenges</h3>
+                    <ul>
+                        <li>Messages get misinterpreted</li>
+                        <li>You send things you regret</li>
+                        <li>Conversations escalate unnecessarily</li>
+                        <li>Need proof of what was actually said</li>
+                        <li>Increased attorney fees and potential court costs due to litigation</li>
+                        <li>Constant tension and conflict</li>
+                        <li>Finding the right words is exhausting</li>
+                    </ul>
+                </div>
+                <div class="ps-card solution-card">
+                    <h3>How We Help</h3>
+                    <ul>
+                        <li>AI helps clarify messages before sending</li>
+                        <li>Safety filters block harmful messages</li>
+                        <li>Deliberate workflow prevents reactions</li>
+                        <li>Immutable records with timestamps</li>
+                        <li>Focus on facts and your children's needs</li>
+                        <li>Support when you need it most</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Attorneys -->
+    <section id="attorneys" class="for-attorneys">
+        <div class="container">
+            <div class="section-header">
+                <h2>For Family Law Attorneys</h2>
+                <p>A tool you can confidently recommend to high-conflict clients</p>
+            </div>
+            <div class="attorney-grid">
+                <div class="attorney-card">
+                    <h3>Reduces Client Conflict</h3>
+                    <p>Safety filtering prevents inflammatory messages before they're sent. Less escalation means less time mediating disputes and more time on legal work.</p>
+                </div>
+                <div class="attorney-card">
+                    <h3>Court-Ready Documentation</h3>
+                    <p>Timestamped, immutable records that meet court standards. Clean exports make evidence presentation easier.</p>
+                </div>
+                <div class="attorney-card">
+                    <h3>Demonstrates Good Faith</h3>
+                    <p>Shows your client is making genuine efforts to communicate appropriately. AI assistance proves they're trying to be reasonable.</p>
+                </div>
+                <div class="attorney-card">
+                    <h3>No Legal Liability</h3>
+                    <p>Clear disclaimers that this is communication assistance, not legal advice. Protects you while helping your clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're NOT -->
+    <section class="features" style="background: #f9fafb;">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Parallel Talk Is NOT</h2>
+                <p>Clear boundaries protect you and keep our focus sharp</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><u>Not</u> Legal Advice</h3>
+                    <p>We don't interpret court orders or tell you what you "should" do legally. Always consult your attorney.</p>
+                </div>
+                <div class="feature-card">
+                    <h3><u>Not</u> Therapy</h3>
+                    <p>We help with communication, not counseling. We're a tool, not a replacement for professional support.</p>
+                </div>
+                <div class="feature-card">
+                    <h3><u>Not</u> Mediation</h3>
+                    <p>We don't resolve disputes or make recommendations. We help you communicate more clearly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>Is this legal advice?</h3>
+                    <p>No. Parallel Talk Parent is a communication assistance tool, not legal advice. We don't interpret court orders or tell you what you "should" do legally. Always consult your attorney for legal guidance.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How does AI safety filtering work?</h3>
+                    <p>Our three-tier system checks your message before sending. Tier 1 blocks harmful content (threats, harassment). Tier 2 suggests neutral alternatives for inflammatory language. Tier 3 offers clarity improvements. You always decide what gets sent.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Are the exports really court-ready?</h3>
+                    <p>Yes. Messages are timestamped, immutable (can't be edited after sending), and exportable in professional PDF format with certification statements. However, admissibility is ultimately up to your court and attorney.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What if my co-parent won't use it?</h3>
+                    <p>Both parents need to use the platform to communicate through it. However, even if your co-parent declines, the waitlist signup helps us understand demand and may influence them to reconsider later.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How much will it cost?</h3>
+                    <p>We're finalizing pricing but expect it to be affordable for most families ($15-30/month per parent). Waitlist members will receive early-bird pricing.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Is my data private and secure?</h3>
+                    <p>Absolutely. We use enterprise-grade encryption, and your messages are only visible to you and your co-parent. We never share, sell, or use your data for anything other than providing the service.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How is this different from other co-parenting apps?</h3>
+                    <p>Other co-parenting platforms primarily focus on scheduling, expenses, and basic messaging. While some offer tone detection, messages can still be sent even if flagged as potentially problematic. Parallel Talk Parent focuses exclusively on communication quality—our AI actively helps rewrite messages for clarity and prevents harmful content from being sent. We complement other apps' logistics features by providing a dedicated space for better messaging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Section -->
+    <section class="future-section">
+        <div class="container">
+            <div class="future-content">
+                <h2>The Future of Parallel Talk</h2>
+                <p>Parallel Talk Parent is just the beginning. We're building a platform for structured communication in any high-conflict situation—eldercare coordination, family disputes, workplace conflicts, and more.</p>
+                <p class="highlight">Same safe communication engine. Different contexts. All built on user control and safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>Parallel Talk</strong> - Communication tools for difficult conversations</p>
+            <p>Starting with Parallel Talk Parent for co-parents</p>
+            <p style="margin-top: 20px;">Questions? <a href="/cdn-cgi/l/email-protection#99f0f7fff6d9e9f8ebf8f5f5fcf5b4edf8f5f2b7faf6f4"><span class="__cf_email__" data-cfemail="026b6c646d42726370636e6e676e2f76636e692c616d6f">[email&#160;protected]</span></a></p>
+            <p style="margin-top: 20px; font-size: 12px; color: #9ca3af;">© 2026 Parallel Talk. All rights reserved.</p>
+            <p style="margin-top: 8px; font-size: 12px; color: #9ca3af;">
+                Parallel Talk Parent is not legal advice, therapy, or mediation. Always consult appropriate professionals.
+            </p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+       
